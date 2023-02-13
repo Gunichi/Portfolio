@@ -9,13 +9,32 @@ import {
   Icon,
   useColorModeValue,
   createIcon,
+  keyframes,
 } from '@chakra-ui/react';
+import { motion } from 'framer-motion';
 import { TypeAnimation } from 'react-type-animation';
-import LottiePlayer from './Lottie';
+import LottiePlayer from '../animations/Lottie';
+import { useEffect, useState } from 'react';
 
 export default function Discover() {
+
+  const animationKeyframes = keyframes`
+    0% { transform: scale(1) rotate(90); }
+    50% { animation: float 5s ease-in-out infinite; transform: translateY(-5px) }
+    100% { transform: scale(1) rotate(90); }
+  `;
+
+  const animation = `${animationKeyframes} 2s ease-in-out infinite`;
+  
+  if (typeof window !== 'undefined') {
+    const [width, setWidth] = useState<number>(window.innerWidth);
+    
+    const isMobile = width <= 768;
+  
+  }
+
   return (
-    <>
+    <Box bg={'#F9F9F9'} id="discover">
       <Head>
         <link
           href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&display=swap"
@@ -33,18 +52,20 @@ export default function Discover() {
           as={Box}
           textAlign={'center'}
           spacing={{ base: 8, md: 14 }}
-          py={{ base: 20, md: 36 }}>
+          pt={{ base: 20, md: 40 }}
+        >
         
           <Heading
             fontWeight={600}
             fontFamily={'Aileron'}
             fontSize={{ base: '2xl', sm: '4xl', md: '6xl' }}
             lineHeight={'110%'}>
-            HEY,{' '}
+            HEY! <span role="img" aria-label="sheep">👋</span>{' '}
             <Text 
               mb={30}
               as={'span'} 
               color={'#ED8A0A'}
+              lineHeight={'110%'}
               _hover={{
                 color: '#301551',
                 transition: '0.5s',
@@ -64,17 +85,18 @@ export default function Discover() {
                 ]}
                 speed={50} // Custom Speed from 1-99 - Default Speed: 40
                 style={{ 
-                  fontSize: '60px',
+                  fontSize: `{isMobile ? 30 : 60}px`,
                   width: '100%',
-
+                  whiteSpace: 'nowrap',
+                  display: 'inline-block',
                 }}
                 wrapper="span" // Animation will be rendered as a <span>
-                repeat={10}
+                repeat={1000} // Animation will repeat forever
               />
             </Text>
           </Heading>
           <Text color={'gray.500'}>
-            I'm a software engineer based in Tokyo, Japan. I specialize in building (and occasionally designing) exceptional websites, applications, and everything in between.
+            I'm a Brazilian software engineer, living in Minas Gerais, Brazil. I'm passionate about building software of all kinds, from web applications to mobile apps. I'm always learning and improving my skills. If you want to know more about me, keep scrolling!
           </Text>
           <Stack
             direction={'column'}
@@ -90,10 +112,11 @@ export default function Discover() {
                 w={71}
                 position={'absolute'}
                 right={-71}
-                top={'40px'}
+                top={'40px'}               
               />
               <Text
                 fontSize={'lg'}
+                animation={animation}
                 fontFamily={'Caveat'}
                 position={'absolute'}
                 right={'-125px'}
@@ -105,7 +128,7 @@ export default function Discover() {
           </Stack>
         </Stack>
       </Container>
-    </>
+    </Box>
   );
 }
 

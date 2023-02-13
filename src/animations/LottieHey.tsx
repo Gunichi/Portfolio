@@ -1,7 +1,7 @@
 import Lottie from 'react-lottie';
-import * as animationData from '../animations/question.json';
+import * as animationData from './hey.json';
 
-const LottiePlayer = () => {
+const LottieHey = () => {
   const defaultOptions = {
     loop: true,
     autoplay: true,
@@ -11,7 +11,8 @@ const LottiePlayer = () => {
     },
   };
 
-  return <Lottie options={defaultOptions} />;
+  return <Lottie height={100}
+  width={100}options={defaultOptions} />;
 };
 
-export default LottiePlayer;
+export default LottieHey;

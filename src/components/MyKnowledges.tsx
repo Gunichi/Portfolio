@@ -1,14 +1,27 @@
 import React from "react";
-import { chakra, Box, Flex, Icon, SimpleGrid, Button, VStack } from "@chakra-ui/react";
+import { chakra, Box, Flex, Icon, SimpleGrid, keyframes, Heading, Stack, Text, Link } from "@chakra-ui/react";
+import { motion } from "framer-motion";
 import { FaDocker, FaNodeJs, FaReact } from "react-icons/fa";
 import { DiJavascript1, DiPhp } from "react-icons/di";
 import { SiCss3, SiHtml5, SiMysql, SiSass, SiSparkar, SiTypescript } from "react-icons/si";
 import { TbBrandNextjs } from "react-icons/tb";
 
 import { Fade } from "react-awesome-reveal";
+import LottieSkills from "@/animations/LottieSkills";
 
 
 export default function MyKnowledges() {
+
+  const animationKeyframes = keyframes`
+  0% { transform: scale(1) rotate(0); }
+
+  50% { animation: float 5s ease-in-out infinite; transform: translateY(-10px);}
+
+  100% { transform: scale(1) rotate(0); }
+`;
+
+  const animation = `${animationKeyframes} 2s ease-in-out infinite`;
+
   const Feature = (props: any) => {
     return (
       <Fade direction="left" cascade>
@@ -22,10 +35,12 @@ export default function MyKnowledges() {
             transition: 'all 0.3s ease-in-out',
             cursor: 'pointer',
             border: '2px solid #EEE',
+            animation: animation,
           }}
         >
           <Flex
             alignItems="center"
+            animation={animation}
             justifyContent="center"
             w={8}
             h={8}
@@ -72,7 +87,7 @@ export default function MyKnowledges() {
 
   return (
     <Flex
-      bg="#edf3f8"
+      bg="red"
       _dark={{ bg: "#3e3e3e" }}
       w="auto"
       justifyContent="center"
@@ -82,7 +97,7 @@ export default function MyKnowledges() {
         px={8}
         py={20}
         mx="auto"
-        bg="white"
+        bg="#F9FAFB"
         _dark={{
           bg: "gray.800",
         }}
@@ -93,35 +108,16 @@ export default function MyKnowledges() {
             lg: "center",
           }}
         >
-          <chakra.p
-            mt={2}
-            fontSize={{
-              base: "3xl",
-              sm: "4xl",
-            }}
-            lineHeight="8"
-            fontWeight="extrabold"
-            letterSpacing="tight"
-            _light={{
-              color: "gray.900",
-            }}
-          >
-            Knowledges
-          </chakra.p>
-          <chakra.p
-            mt={4}
-            maxW="2xl"
-            fontSize="xl"
-            mx={{
-              lg: "auto",
-            }}
-            color="gray.500"
-            _dark={{
-              color: "gray.400",
-            }}
-          >
-            In this 2 years, I have learned a lot of things. I have learned...
-          </chakra.p>
+        <Stack spacing={0} align={'center'}>
+          <Heading>
+            <Flex alignItems="center">
+              Knowledges <LottieSkills />
+            </Flex>
+          </Heading>
+          <Text color={'gray.500'}> 
+            I have learned many languages and frameworks for 2 years. Some of them are listed below.
+          </Text>
+        </Stack>
         </Box>
         <SimpleGrid
           columns={{
@@ -148,7 +144,6 @@ export default function MyKnowledges() {
             }
           >
             I have learned ReactJS for 2 years. I have learned how to use ReactJS and how to use ReactJS with TypeScript.
-
           </Feature>
 
           <Feature
@@ -158,8 +153,7 @@ export default function MyKnowledges() {
               <DiPhp size="1.25em" />
             }
           >
-            Your central hub that helps you see, and react to, absolutely
-            everything that’s happening.
+            I have learned PHP when I was starting to learn programming. I have learned how to use PHP and how to use PHP with Zend Framework(now Laminas).
           </Feature>
 
           <Feature
@@ -169,8 +163,7 @@ export default function MyKnowledges() {
               <DiJavascript1 size="1.25em" />
             }
           >
-            Stay informed with daily, weekly, or monthly reports on all your
-            insights data.
+            I am always learning Javascript. I have been using Javascript for 2 years. I have learned how to use Javascript and how to use Javascript with ReactJS.
           </Feature>
 
           <Feature
@@ -180,8 +173,7 @@ export default function MyKnowledges() {
               <FaDocker size="1.25em" />
             }
           >
-            Our forecasting is your magical crystal ball that helps you predict
-            and plan for the future.
+            Docker is a tool that allows you to create, deploy, and run applications by using containers. I have learned how to use Docker and how to use Docker with ReactJS.
           </Feature>
           <Feature
             color="cyan"
@@ -190,8 +182,7 @@ export default function MyKnowledges() {
               <FaReact size="1.25em" />
             }
           >
-            How does your company compare? Learn how your company stacks up in
-            the industry.
+            Learn React Native is my hobby. I have learned how to use React Native and how to use React Native with TypeScript.
           </Feature>
           <Feature
             color="orange"
@@ -200,8 +191,7 @@ export default function MyKnowledges() {
               <SiMysql size="1.25em" />
             }
           >
-            Organize your customers to bring meaningful and comparative insights
-            across your dashboards.
+            SQL has been essential to my career. I have learned how to use SQL and how to use SQL with PHP and many other languages.
           </Feature>
           <Feature
             color="green"
@@ -210,8 +200,7 @@ export default function MyKnowledges() {
               <FaNodeJs size="1.25em" />
             }
           >
-            Improve your conversion rates by monitoring exactly what’s going on
-            while your customers are in trial.
+            NodeJS is my headache. It's hard but I like it, and I hove to improve my skills on it.
           </Feature>
 
           <Feature
@@ -221,8 +210,7 @@ export default function MyKnowledges() {
               <TbBrandNextjs size="1.25em" />
             }
           >
-            Personalized segmentation, rich customer profiles, manual
-            subscriptions, and more!
+            NextJS is a framework for ReactJS. I'm always using it for my projects. This site, for example, is made with NextJS.
           </Feature>
 
           <Feature
@@ -232,8 +220,7 @@ export default function MyKnowledges() {
               <SiTypescript size="1.20em" />
             }
           >
-            Merge external data with your metrics for deeper insights in to your
-            customers and your business.
+            Typescript is a superset of Javascript. I'm always using it for my projects too because it's very useful.
           </Feature>
 
           <Feature
@@ -243,8 +230,7 @@ export default function MyKnowledges() {
               <SiHtml5 size="1.25em" />
             }
           >
-            Want your metrics in other services? Extend and integrate to our
-            every part of your business.
+            Well, HTML is a markup language. I have learned how to use HTML and how to use HTML with CSS when I was starting to learn programming.
           </Feature>
 
           <Feature
@@ -254,7 +240,7 @@ export default function MyKnowledges() {
               <SiCss3 size="1.25em" />
             }
           >
-            Send important updates from here to your team’s Support channels.
+            CSS is a style sheet language. I have learned how to use CSS and how to use CSS with HTML when I was starting to learn programming.
           </Feature>
 
           <Feature
@@ -264,8 +250,7 @@ export default function MyKnowledges() {
               <SiSass size="1.25em" />
             }
           >
-            Goals, Breakouts, Instant notifications, Comparisons, Annotations
-            and Cohort Analysis!
+            SASS is a CSS preprocessor. I have learned how to use SASS and how to use SASS with HTML and CSS when I was starting to learn programming. But I have to much to learn about SASS.
           </Feature>
           <Feature
             color="pink"
@@ -274,8 +259,15 @@ export default function MyKnowledges() {
               <SiSparkar size="1.25em" />
             }
           >
-            Goals, Breakouts, Instant notifications, Comparisons, Annotations
-            and Cohort Analysis!
+            Another Hobby, I have used SPARK AR for some filters on Instagram. Click {" "}
+              <Link 
+                href="https://www.instagram.com/taufik.rahman/" 
+                isExternal
+                color="#ED8936"
+              >
+                here
+              </Link> 
+            {" "} to see my filter portfolio.
           </Feature>
         </SimpleGrid>
       </Box>

@@ -14,11 +14,13 @@ import {
   Input,
   FormControl,
   FormLabel,
+  Flex,
 } from '@chakra-ui/react';
+import LottieMessage from '@/animations/LottieMessage';
 
 export default function Contact() {
   return (
-    <>
+    <Box bg={'#F9F9F9'} id="contact">
       <Head>
         <link
           href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&display=swap"
@@ -36,45 +38,35 @@ export default function Contact() {
           as={Box}
           textAlign={'center'}
           spacing={{ base: 8, md: 14 }}
-          py={{ base: 20, md: 36 }}>
-          <Heading
-            fontWeight={600}
-            color={'#301551'}
-            fontFamily={'Aileron'}
-            fontSize={{ base: '2xl', sm: '4xl', md: '6xl' }}
-            lineHeight={'110%'}>
-              Feel free to{' '}
-            <Text 
-              as={'span'} 
-              color={'#ED8A0A'}
-              _hover={{
-                color: '#ED8A0A',
-                transition: '0.3s',
-              }}
-            >
-              contact me!
-            </Text>
-          </Heading>
-          <Text color={'gray.500'}>
-            I'm always open to discussing new projects, creative ideas or opportunities to be part of your visions. So if you'd like to say hi, I'll be happy to hear from you!
-          </Text>
-          <SimpleGrid columns={{ base: 1, md: 2 }} spacing={10}>
-            <FormControl id="name" isRequired>
-              <FormLabel color={'gray.500'}>Your name</FormLabel>
-              <Input variant='flushed' placeholder='Enter your name' focusBorderColor='#301551' />
+          py={{ base: 20, md: 36 }}
+          >
+            <Stack spacing={0} align={'center'}>
+              <Heading>
+                <Flex align={'center'}>
+                Feel free to contact me <LottieMessage />
+                </Flex>
+              </Heading>
+              <Text color={'gray.500'}>
+                I'm always open to discussing new projects, creative ideas or opportunities to be part of your visions. So if you'd like to say hi, I'll be happy to hear from you!
+              </Text>
+            </Stack>
+            <SimpleGrid columns={{ base: 1, md: 2 }} spacing={10}>
+              <FormControl id="name" isRequired>
+                <FormLabel color={'gray.500'}>Your name</FormLabel>
+                <Input variant='flushed' placeholder='Enter your name' focusBorderColor='#301551' />
+              </FormControl>
+              <FormControl id="email" isRequired>
+                <FormLabel color={'gray.500'}>Your email</FormLabel>
+                <Input variant='flushed' placeholder='Enter your email' focusBorderColor='#301551' />
+              </FormControl>
+            </SimpleGrid>
+            <FormControl id="message" isRequired>
+              <FormLabel color={'gray.500'}>Your message</FormLabel>
+              <Input variant='flushed' placeholder='Feel free to ask me anything!' focusBorderColor='#301551' />
             </FormControl>
-            <FormControl id="email" isRequired>
-              <FormLabel color={'gray.500'}>Your email</FormLabel>
-              <Input variant='flushed' placeholder='Enter your email' focusBorderColor='#301551' />
-            </FormControl>
-          </SimpleGrid>
-          <FormControl id="message" isRequired>
-            <FormLabel color={'gray.500'}>Your message</FormLabel>
-            <Input variant='flushed' placeholder='Feel free to ask me anything!' focusBorderColor='#301551' />
-          </FormControl>
         </Stack>
       </Container>
-    </>
+    </Box>
   );
 }
 

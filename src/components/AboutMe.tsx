@@ -8,21 +8,30 @@ import {
   Button,
   Image,
   Icon,
-  IconButton,
-  createIcon,
   IconProps,
-  useColorModeValue,
+  keyframes,
 } from '@chakra-ui/react';
+import { motion } from 'framer-motion';
 import { AiFillInstagram, AiFillLinkedin, AiFillGithub } from 'react-icons/ai';
 
 import { Fade } from "react-awesome-reveal";
 
 import Head from 'next/head';
-import LottiePlayer from './LottieQuestion';
+import LottieInterrogation from '@/animations/LottieInterrogation';
+import useGradient from '@/gradient/useGradient';
+import { Underline } from '@/gradient/underline';
 
 export default function AboutMe() {
+
+  const animationKeyframes = keyframes`
+  0% { transform: scale(1) rotate(0); }
+
+  50% { animation: float 5s ease-in-out infinite; transform: translateY(-10px);}
+`;
+  const animation = `${animationKeyframes} 2s ease-in-out infinite`;
+  
   return (
-    <>
+    <Box>
       <Head>
         <link
           href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&display=swap"
@@ -32,7 +41,7 @@ export default function AboutMe() {
           href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&display=swap"
           rel="stylesheet"
         />
-      </Head>
+      </Head>  
       <Container maxW={'7xl'}>
         <Stack
           align={'center'}
@@ -45,9 +54,16 @@ export default function AboutMe() {
               lineHeight={1.1}
               fontWeight={600}
               fontSize={{ base: '3xl', sm: '4xl', lg: '6xl' }}>
-              <Fade direction="left" cascade>
+              <Fade direction="right" cascade>
                 <Text
                   as={'span'}
+                  transition=' background-size 2s ease-in;'
+                  _hover={{
+                    bgGradient: 'linear(to-r, #ED8A0A, #301455)',
+                    bgSize: '200%',
+                    transition: 'background-size 10s ease-in',
+
+                  }}
                   position={'relative'}
                   _after={{
                     content: "''",
@@ -61,22 +77,22 @@ export default function AboutMe() {
                   }}>
                   Who am I?
                 </Text>
+                
               </Fade>
               <br />
-              <Fade direction="left" cascade>
+              <Fade direction="right" cascade>
                 <Text as={'span'} color={'#ED8A0A'}>
-                  How did I get here?
+                  How did I get here? 
                 </Text>
               </Fade>
             </Heading>
-            <Fade direction="left" cascade>
+            <Fade direction="right" cascade>
               <Text color={'gray.500'}>
-                I started my career as a software engineer in 2018. 
-                I've been working as a software engineer for 3 years. 
-                I've been working on a variety of interesting and meaningful projects on a daily basis. 
+                I started my career as a software engineer in 2021 and since then I've been working as a software engineer for 2 years.
+                Maybe I'm not the best, but I'm always trying to improve myself and learn new things.
               </Text>
             </Fade>
-            <Fade direction="left" cascade>
+            <Fade direction="right" cascade>
               <Stack
                 spacing={{ base: 4, sm: 6 }}
                 direction={{ base: 'column', sm: 'row' }}>
@@ -123,15 +139,20 @@ export default function AboutMe() {
                   rounded={'full'}
                   size={'lg'}
                   fontWeight={'normal'}
+                  bgGradient="linear(to-r, rgb(237, 138, 10, 0.9), rgb(48, 21, 81, 0.8))"
                   px={6}
                   _hover={{
-                    bgGradient: 'linear(to-r, #333333, #000000)',
+                    bgGradient: 'linear(to-r, rgba(65, 65, 65, 0.5), #020202)',
                     boxShadow: 'xl',
                     transform: 'translateY(-2px)',
                     transition: 'all 0.2s ease-in-out',
                     color: 'white'
                   }}
-                  leftIcon={<AiFillGithub color={'#ED8A0A'} />}
+                  leftIcon={
+                    <AiFillGithub 
+                      color={'#301551'} 
+                  />}
+            
                 >
                   Github
                 </Button>
@@ -149,34 +170,37 @@ export default function AboutMe() {
                 w={'100%'}
                 h={'100%'}
                 position={'absolute'}
-                top={'-20%'}
+                top={[10, -5, -20, -20]}
                 left={0}
                 zIndex={-1}
                 color='rgb(48, 21, 81, 0.1)'
               />
-              <Box
-                position={'relative'}
-                height={'300px'}
-                rounded={'100%'}
-                boxShadow={'2xl'}
-                width={'300px'}
-                overflow={'hidden'}
-              >
-                <Image
-                  alt={'Hero Image'}
-                  fit={'cover'}
-                  align={'center'}
-                  w={'100%'}
-                  h={'100%'}
-                  src={'https://i.imgur.com/BOn7Ouy.jpg'}
-                  _hover={{
-                    transform: 'scale(1.1)',
-                    transition: 'all 0.2s ease-in-out',
-                    filter: 'brightness(0.8) contrast(1.2) saturate(1.2) hue-rotate(10deg) grayscale(0.2)', 
-                    boxShadow: 'xl',
-                  }}
-                />
-              </Box>
+              <Fade direction="right" cascade>
+                <Box
+                  animation={animation}
+                  position={'relative'}
+                  height={'300px'}
+                  rounded={'100%'}
+                  boxShadow={'2xl'}
+                  width={'300px'}
+                  overflow={'hidden'}
+                >
+                  <Image
+                    alt={'Hero Image'}
+                    fit={'cover'}
+                    align={'center'}
+                    w={'100%'}
+                    h={'100%'}
+                    src={'https://i.imgur.com/BOn7Ouy.jpg'}
+                    _hover={{
+                      transform: 'scale(1.1)',
+                      transition: 'all 0.2s ease-in-out',
+                      filter: 'brightness(0.8) contrast(1.2) saturate(1.2) hue-rotate(10deg) grayscale(0.2)', 
+                      boxShadow: 'xl',
+                    }}
+                  />
+                </Box>
+              </Fade>
               <Blob
                 w={'100%'}
                 h={'100%'}
@@ -189,7 +213,7 @@ export default function AboutMe() {
           </Flex>
         </Stack>
       </Container>
-    </>
+    </Box>
   );
 }
 

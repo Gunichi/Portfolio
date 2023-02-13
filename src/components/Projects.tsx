@@ -10,6 +10,9 @@ import {
   useColorModeValue,
   Image,
 } from '@chakra-ui/react';
+import LottieCoffee from '@/animations/LottieCoffee';
+import LottieCoding from '@/animations/LottieCoding';
+import useGradient from '@/gradient/useGradient';
 
 const Testimonial = ({ children }: { children: ReactNode }) => {
   return <Box>{children}</Box>;
@@ -18,7 +21,7 @@ const Testimonial = ({ children }: { children: ReactNode }) => {
 const TestimonialContent = ({ children }: { children: ReactNode }) => {
   return (
     <Stack
-      bg={useColorModeValue('white', 'gray.800')}
+      bg='#F9FAFB'
       boxShadow={'lg'}
       p={8}
       rounded={'xl'}
@@ -92,12 +95,18 @@ const TestimonialAvatar = ({
 };
 
 export default function Projects() {
+
   return (
-    <Box bg={useColorModeValue('white', 'gray.700')}>
+    <Box>
       <Container maxW={'7xl'} py={16} as={Stack} spacing={12}>
         <Stack spacing={0} align={'center'}>
-          <Heading>My Projects</Heading>
-          <Text> I have worked on a few projects for clients and myself.</Text>
+          <Heading>
+            <Flex align={'center'}>
+              My Projects
+              <LottieCoding />
+            </Flex>
+          </Heading>
+          <Text color={'gray.500'}> I have worked on a few projects for clients and myself.</Text>
         </Stack>
         <Stack
           direction={{ base: 'column', md: 'row' }}
@@ -129,19 +138,19 @@ export default function Projects() {
           </Testimonial>
           <Testimonial>
             <TestimonialContent>
-              <TestimonialHeading>Mindblowing Service</TestimonialHeading>
+              <TestimonialHeading>Get a coffee and relax...</TestimonialHeading>
+              <LottieCoffee />
               <TestimonialText>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Auctor
-                neque sed imperdiet nibh lectus feugiat nunc sem.
+                This project is still in development. You will be able to find it here soon.
               </TestimonialText>
             </TestimonialContent>
-            <TestimonialAvatar
+            {/* <TestimonialAvatar
               src={
                 'https://images.unsplash.com/photo-1586297135537-94bc9ba060aa?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80'
               }
               name={'Jane Cooper'}
               title={'CEO at ABC Corporation'}
-            />
+            /> */}
           </Testimonial>
         </Stack>
       </Container>

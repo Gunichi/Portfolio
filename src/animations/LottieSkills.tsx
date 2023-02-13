@@ -1,7 +1,7 @@
 import Lottie from 'react-lottie';
-import * as animationData from '../animations/scrollDown.json';
+import * as animationData from './skills.json';
 
-const LottiePlayer = () => {
+const LottieSkills = () => {
   const defaultOptions = {
     loop: true,
     autoplay: true,
@@ -11,7 +11,7 @@ const LottiePlayer = () => {
     },
   };
 
-  return <Lottie options={defaultOptions} />;
+  return <Lottie height={60} width={60} options={defaultOptions} />;
 };
 
-export default LottiePlayer;
+export default LottieSkills;
