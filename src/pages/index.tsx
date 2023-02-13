@@ -55,7 +55,6 @@ export default function Home() {
             <Contact />
           </Fade>
           <Footer />
-          {/* <Page /> */}
         </>
       )}
     </>
