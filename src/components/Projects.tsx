@@ -12,7 +12,9 @@ import {
 } from '@chakra-ui/react';
 import LottieCoffee from '@/animations/LottieCoffee';
 import LottieCoding from '@/animations/LottieCoding';
-import useGradient from '@/gradient/useGradient';
+import { en, pt } from '@/locales/translation';
+import { useRouter } from 'next/router';
+
 
 const Testimonial = ({ children }: { children: ReactNode }) => {
   return <Box>{children}</Box>;
@@ -96,27 +98,35 @@ const TestimonialAvatar = ({
 
 export default function Projects() {
 
+  const router = useRouter();
+  const { locale } = router;
+
+  const t = locale === 'en' ? en : pt;
+
   return (
     <Box>
       <Container maxW={'7xl'} py={16} as={Stack} spacing={12}>
         <Stack spacing={0} align={'center'}>
           <Heading>
             <Flex align={'center'}>
-              My Projects
-              <LottieCoding />
+              {t.projects.title} <LottieCoding />
             </Flex>
           </Heading>
-          <Text color={'gray.500'}> I have worked on a few projects for clients and myself.</Text>
+          <Text color={'gray.500'}> 
+            {t.projects.subtitle}
+          </Text>
         </Stack>
         <Stack
           direction={{ base: 'column', md: 'row' }}
           spacing={{ base: 10, md: 4, lg: 10 }}>
           <Testimonial>
             <TestimonialContent>
-              <TestimonialHeading>Find My Pet</TestimonialHeading>
+              <TestimonialHeading>
+                Find My Pet
+              </TestimonialHeading>
               <Image src="https://i.imgur.com/bQqaCAD.png" width="100" height="100" alt="Find My Pet Logo" />
               <TestimonialText>
-                Find My Pet is a mobile application that allows users to post lost pets and find lost pets.
+                {t.projects.findMyPet.description}
               </TestimonialText>
             </TestimonialContent>
             {/* <TestimonialAvatar
@@ -132,16 +142,18 @@ export default function Projects() {
               <TestimonialHeading>My Way</TestimonialHeading>
               <Image src="https://i.imgur.com/KiNsn8w.png" width="100" height="100" alt="My Way Logo" />
               <TestimonialText>
-                My Way is a web and mobile application that allows users to find courses of investment and financial planning.
+                {t.projects.MyWay.description}
               </TestimonialText>
             </TestimonialContent>
           </Testimonial>
           <Testimonial>
             <TestimonialContent>
-              <TestimonialHeading>Get a coffee and relax...</TestimonialHeading>
+              <TestimonialHeading>
+                {t.projects.wait.title}
+              </TestimonialHeading>
               <LottieCoffee />
               <TestimonialText>
-                This project is still in development. You will be able to find it here soon.
+                {t.projects.wait.description}
               </TestimonialText>
             </TestimonialContent>
             {/* <TestimonialAvatar

@@ -15,6 +15,8 @@ import { motion } from 'framer-motion';
 import { TypeAnimation } from 'react-type-animation';
 import LottiePlayer from '../animations/Lottie';
 import { useEffect, useState } from 'react';
+import { en, pt } from '@/locales/translation';
+import { useRouter } from 'next/router';
 
 export default function Discover() {
 
@@ -30,8 +32,12 @@ export default function Discover() {
     const [width, setWidth] = useState<number>(window.innerWidth);
     
     const isMobile = width <= 768;
-  
   }
+
+  const router = useRouter();
+  const { locale } = router;
+
+  const t = locale === 'en' ? en : pt;
 
   return (
     <Box bg={'#F9F9F9'} id="discover">
@@ -59,8 +65,10 @@ export default function Discover() {
             fontWeight={600}
             fontFamily={'Aileron'}
             fontSize={{ base: '2xl', sm: '4xl', md: '6xl' }}
-            lineHeight={'110%'}>
-            HEY! <span role="img" aria-label="sheep">👋</span>{' '}
+            lineHeight={'110%'}
+          >
+            {t.discover.title}
+            <span role="img" aria-label="sheep">👋</span>{' '}
             <Text 
               mb={30}
               as={'span'} 
@@ -74,18 +82,16 @@ export default function Discover() {
               <TypeAnimation
                 // Same String at the start will only be typed once, initially
                 sequence={[
-                `I'M GUNICHI.`,
+                t.discover.sequence1,
                 1000,
-                `I'M A SOFTWARE ENGINEER.`,
+                t.discover.sequence2,
                 1000,
-                `I'M A FULL STACK DEVELOPER.`,
-                1000,
-                `I'M ALWAYS LEARNING.`,
+                t.discover.sequence3,
                 1000,
                 ]}
                 speed={50} // Custom Speed from 1-99 - Default Speed: 40
                 style={{ 
-                  fontSize: `{isMobile ? 30 : 60}px`,
+                  fontSize: `{isMobile ? 20 : 60}px`,
                   width: '100%',
                   whiteSpace: 'nowrap',
                   display: 'inline-block',
@@ -96,7 +102,7 @@ export default function Discover() {
             </Text>
           </Heading>
           <Text color={'gray.500'}>
-            I'm a Brazilian software engineer, living in Minas Gerais, Brazil. I'm passionate about building software of all kinds, from web applications to mobile apps. I'm always learning and improving my skills. If you want to know more about me, keep scrolling!
+            {t.discover.description}
           </Text>
           <Stack
             direction={'column'}
@@ -122,7 +128,7 @@ export default function Discover() {
                 right={'-125px'}
                 top={'20px'}
                 transform={'rotate(10deg)'}>
-                Scroll down
+                {t.discover.scroll}
               </Text>
             </Box>
           </Stack>

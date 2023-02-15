@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@chakra-ui/icons": "^2.0.17",
     "@chakra-ui/react": "^2.4.9",
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
@@ -20,6 +21,7 @@
     "eslint": "8.33.0",
     "eslint-config-next": "13.1.6",
     "framer-motion": "^9.0.2",
+    "i18next": "^22.4.9",
     "next": "13.1.6",
     "react": "18.2.0",
     "react-awesome-reveal": "^4.2.3",

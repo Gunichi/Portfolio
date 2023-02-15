@@ -6,10 +6,7 @@ import {
   Text,
   Button,
   Stack,
-  Icon,
-  useColorModeValue,
   createIcon,
-  Divider,
   SimpleGrid,
   Input,
   FormControl,
@@ -17,8 +14,16 @@ import {
   Flex,
 } from '@chakra-ui/react';
 import LottieMessage from '@/animations/LottieMessage';
+import { useRouter } from 'next/router';
+import { BsFillArrowRightCircleFill } from 'react-icons/bs';
+import { en, pt } from '@/locales/translation';
 
 export default function Contact() {
+
+  const router = useRouter();
+  const { locale } = router;
+  const t = locale === 'en' ? en : pt;
+
   return (
     <Box bg={'#F9F9F9'} id="contact">
       <Head>
@@ -43,27 +48,60 @@ export default function Contact() {
             <Stack spacing={0} align={'center'}>
               <Heading>
                 <Flex align={'center'}>
-                Feel free to contact me <LottieMessage />
+                  {t.contact.title} <LottieMessage />
                 </Flex>
               </Heading>
               <Text color={'gray.500'}>
-                I'm always open to discussing new projects, creative ideas or opportunities to be part of your visions. So if you'd like to say hi, I'll be happy to hear from you!
+                {t.contact.subtitle}
               </Text>
             </Stack>
             <SimpleGrid columns={{ base: 1, md: 2 }} spacing={10}>
               <FormControl id="name" isRequired>
-                <FormLabel color={'gray.500'}>Your name</FormLabel>
-                <Input variant='flushed' placeholder='Enter your name' focusBorderColor='#301551' />
+                <FormLabel color={'gray.500'}>
+                  {t.contact.formName}
+                </FormLabel>
+                <Input 
+                  variant='flushed' 
+                  placeholder={t.contact.formNamePlaceholder}
+                  focusBorderColor='#301551' 
+                />
               </FormControl>
               <FormControl id="email" isRequired>
-                <FormLabel color={'gray.500'}>Your email</FormLabel>
-                <Input variant='flushed' placeholder='Enter your email' focusBorderColor='#301551' />
+                <FormLabel color={'gray.500'}>
+                  {t.contact.formEmail}
+                </FormLabel>
+                <Input 
+                  variant='flushed' 
+                  placeholder={t.contact.formEmailPlaceholder}
+                  focusBorderColor='#301551' 
+                />
               </FormControl>
             </SimpleGrid>
             <FormControl id="message" isRequired>
-              <FormLabel color={'gray.500'}>Your message</FormLabel>
-              <Input variant='flushed' placeholder='Feel free to ask me anything!' focusBorderColor='#301551' />
+              <FormLabel color={'gray.500'}>
+                {t.contact.formMessage}
+              </FormLabel>
+              <Input 
+                variant='flushed' 
+                placeholder={t.contact.formMessagePlaceholder}
+                focusBorderColor='#301551' 
+              />
             </FormControl>
+            <Flex align={'center'} justify={'flex-end'}>
+              <Button
+                bgGradient={'linear(to-r, #ED8A0A, #301551)'}
+                color={'white'}
+                rightIcon={<BsFillArrowRightCircleFill />}
+                _hover={{
+                  bgGradient: 'linear(to-r, #301551, #ED8A0A)',
+                  shadow: 'xl',
+                  transform: 'translateY(-2px)',
+                  transition: 'all 0.2s',
+                }}
+              >
+                {t.contact.formSubmit}
+              </Button>             
+            </Flex>
         </Stack>
       </Container>
     </Box>

@@ -10,25 +10,43 @@ import {
   Icon,
   IconProps,
   keyframes,
+  Link,
 } from '@chakra-ui/react';
-import { motion } from 'framer-motion';
 import { AiFillInstagram, AiFillLinkedin, AiFillGithub } from 'react-icons/ai';
 
 import { Fade } from "react-awesome-reveal";
 
 import Head from 'next/head';
-import LottieInterrogation from '@/animations/LottieInterrogation';
-import useGradient from '@/gradient/useGradient';
-import { Underline } from '@/gradient/underline';
+
+import { en, pt } from '@/locales/translation';
+import { useRouter } from 'next/router';
+import { FaFileDownload } from 'react-icons/fa';
+
 
 export default function AboutMe() {
 
-  const animationKeyframes = keyframes`
-  0% { transform: scale(1) rotate(0); }
+  const router = useRouter();
+  const { locale } = router;
 
-  50% { animation: float 5s ease-in-out infinite; transform: translateY(-10px);}
-`;
+  const t = locale === 'en' ? en : pt;
+  
+  const animationKeyframes = keyframes`
+    0% { transform: scale(1) rotate(0); }
+
+    50% { animation: float 5s ease-in-out infinite; transform: translateY(-10px);}
+    `;
   const animation = `${animationKeyframes} 2s ease-in-out infinite`;
+
+  const animationFromLeftToRight = keyframes`
+    0% { transform: translateX(-100px); }
+    100% { transform: translateX(0px); background-image: -webkit-linear-gradient(45deg, #ED8A0A, #301551); }
+  `;
+
+  const animationFromLetfToRight = `${animationFromLeftToRight} 1s ease-in-out`;
+
+  const handleDownload = () => {
+    window.open(t.about.cv, '_blank');
+  };
   
   return (
     <Box>
@@ -57,12 +75,8 @@ export default function AboutMe() {
               <Fade direction="right" cascade>
                 <Text
                   as={'span'}
-                  transition=' background-size 2s ease-in;'
                   _hover={{
-                    bgGradient: 'linear(to-r, #ED8A0A, #301455)',
-                    bgSize: '200%',
-                    transition: 'background-size 10s ease-in',
-
+                    animation: animationFromLetfToRight
                   }}
                   position={'relative'}
                   _after={{
@@ -75,88 +89,114 @@ export default function AboutMe() {
                     bg: '#ED8A0A',
                     zIndex: -1,
                   }}>
-                  Who am I?
+                    {t.about.title}
                 </Text>
                 
               </Fade>
               <br />
               <Fade direction="right" cascade>
                 <Text as={'span'} color={'#ED8A0A'}>
-                  How did I get here? 
+                  {t.about.subtitle}
                 </Text>
               </Fade>
             </Heading>
             <Fade direction="right" cascade>
               <Text color={'gray.500'}>
-                I started my career as a software engineer in 2021 and since then I've been working as a software engineer for 2 years.
-                Maybe I'm not the best, but I'm always trying to improve myself and learn new things.
+                {t.about.description}
               </Text>
             </Fade>
             <Fade direction="right" cascade>
               <Stack
                 spacing={{ base: 4, sm: 6 }}
                 direction={{ base: 'column', sm: 'row' }}>
-                <Button
-                  rounded={'full'}
-                  size={'lg'}
-                  fontWeight={'normal'}
-                  color={'white'}
-                  px={6}
-                  bgGradient="linear(to-r, rgb(237, 138, 10, 0.9), rgb(48, 21, 81, 0.8))"
-                  _hover={{ 
-                    bgGradient: 'linear(45deg, #405de6, #5851db, #833ab4, #c13584, #e1306c, #fd1d1d)',
-                    boxShadow: 'xl',
-                    transform: 'translateY(-2px)',
-                    transition: 'all 0.2s ease-in-out',
-                  }}
-                  leftIcon={
-                    <AiFillInstagram
-                      color={'#301551'} 
-                    />
-                  }
-                >
-                  Instagram
-                </Button>
-                <Button
-                  rounded={'full'}
-                  size={'lg'}
-                  fontWeight={'normal'}
-                  bgGradient="linear(to-r, rgb(237, 138, 10, 0.9), rgb(48, 21, 81, 0.8))"
-                  color={'white'}
-                  px={6}
-                  _hover={{
-                    bgGradient: 'linear-gradient(45deg, #0077b5, #1a9cb6, rgba(0, 118, 181, 0.829))',
-                    boxShadow: 'xl',
-                    transform: 'translateY(-2px)',
-                    transition: 'all 0.2s ease-in-out',
-                    color: 'white'
-                  }}
-                  leftIcon={<AiFillLinkedin color={'#301551'} />}
-                >
-                  LinkedIn
-                </Button>
-                <Button
-                  rounded={'full'}
-                  size={'lg'}
-                  fontWeight={'normal'}
-                  bgGradient="linear(to-r, rgb(237, 138, 10, 0.9), rgb(48, 21, 81, 0.8))"
-                  px={6}
-                  _hover={{
-                    bgGradient: 'linear(to-r, rgba(65, 65, 65, 0.5), #020202)',
-                    boxShadow: 'xl',
-                    transform: 'translateY(-2px)',
-                    transition: 'all 0.2s ease-in-out',
-                    color: 'white'
-                  }}
-                  leftIcon={
-                    <AiFillGithub 
-                      color={'#301551'} 
-                  />}
-            
-                >
-                  Github
-                </Button>
-
+                <Link href="https://www.instagram.com/gunichi/" isExternal style={{ textDecoration: 'none' }}>
+                  <Button
+                    rounded={'full'}
+                    size={'lg'}
+                    fontWeight={'normal'}
+                    color={'white'}
+                    px={6}
+                    bgGradient="linear(to-r, rgb(237, 138, 10, 0.9), rgb(48, 21, 81, 0.8))"
+                    _hover={{ 
+                      bgGradient: 'linear(45deg, #405de6, #5851db, #833ab4, #c13584, #e1306c, #fd1d1d)',
+                      boxShadow: 'xl',
+                      transform: 'translateY(-2px)',
+                      transition: 'all 0.2s ease-in-out',
+                    }}
+                    leftIcon={
+                      <AiFillInstagram
+                        color={'#301551'} 
+                      />
+                    }
+                  >
+                    Instagram
+                  </Button>
+                </Link>
+                <Link href="https://www.linkedin.com/in/gustavo-gunichi-koyama-a1405a213/" isExternal style={{ textDecoration: 'none' }}>
+                  <Button
+                    rounded={'full'}
+                    size={'lg'}
+                    fontWeight={'normal'}
+                    bgGradient="linear(to-r, rgb(237, 138, 10, 0.9), rgb(48, 21, 81, 0.8))"
+                    color={'white'}
+                    px={6}
+                    _hover={{
+                      bgGradient: 'linear-gradient(45deg, #0077b5, #1a9cb6, rgba(0, 118, 181, 0.829))',
+                      boxShadow: 'xl',
+                      transform: 'translateY(-2px)',
+                      transition: 'all 0.2s ease-in-out',
+                      color: 'white'
+                    }}
+                    leftIcon={<AiFillLinkedin color={'#301551'} />}
+                  >
+                    LinkedIn
+                  </Button>
+                </Link>
+                <Link href="https://github.com/gunichi" isExternal>
+                  <Button
+                    rounded={'full'}
+                    size={'lg'}
+                    fontWeight={'normal'}
+                    bgGradient="linear(to-r, rgb(237, 138, 10, 0.9), rgb(48, 21, 81, 0.8))"
+                    px={6}
+                    _hover={{
+                      bgGradient: 'linear(to-r, rgba(65, 65, 65, 0.5), #020202)',
+                      boxShadow: 'xl',
+                      transform: 'translateY(-2px)',
+                      transition: 'all 0.2s ease-in-out',
+                      color: 'white'
+                    }}
+                    leftIcon={
+                      <AiFillGithub 
+                        color={'#301551'} 
+                    />}
+                  >
+                    Github
+                  </Button>
+                </Link>
+                <Link href="https://github.com/gunichi" isExternal style={{ textDecoration: 'none' }}>
+                  <Button
+                    rounded={'full'}
+                    size={'lg'}
+                    fontWeight={'normal'}
+                    bgGradient="linear(to-r, rgb(237, 138, 10, 0.9), rgb(48, 21, 81, 0.8))"
+                    px={6}
+                    _hover={{
+                      bgGradient: 'linear(to-r, #F40F02, #8806ce)',
+                      boxShadow: 'xl',
+                      transform: 'translateY(-2px)',
+                      transition: 'all 0.2s ease-in-out',
+                      color: 'white'
+                    }}
+                    onClick={() => handleDownload()}
+                    leftIcon={
+                      <FaFileDownload
+                        color={'#301551'} 
+                    />}
+                  >
+                    CV
+                  </Button>
+                </Link>
               </Stack>
             </Fade>
           </Stack>

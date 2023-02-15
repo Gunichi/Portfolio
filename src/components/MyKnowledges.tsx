@@ -8,6 +8,8 @@ import { TbBrandNextjs } from "react-icons/tb";
 
 import { Fade } from "react-awesome-reveal";
 import LottieSkills from "@/animations/LottieSkills";
+import { useRouter } from "next/router";
+import { en, pt } from '@/locales/translation';
 
 
 export default function MyKnowledges() {
@@ -21,6 +23,11 @@ export default function MyKnowledges() {
 `;
 
   const animation = `${animationKeyframes} 2s ease-in-out infinite`;
+
+  const router = useRouter();
+  const { locale } = router;
+
+  const t = locale === 'en' ? en : pt;
 
   const Feature = (props: any) => {
     return (
@@ -111,11 +118,11 @@ export default function MyKnowledges() {
         <Stack spacing={0} align={'center'}>
           <Heading>
             <Flex alignItems="center">
-              Knowledges <LottieSkills />
+              {t.myKnowledge.title} <LottieSkills />
             </Flex>
           </Heading>
           <Text color={'gray.500'}> 
-            I have learned many languages and frameworks for 2 years. Some of them are listed below.
+            {t.myKnowledge.subtitle}
           </Text>
         </Stack>
         </Box>
@@ -143,7 +150,7 @@ export default function MyKnowledges() {
 
             }
           >
-            I have learned ReactJS for 2 years. I have learned how to use ReactJS and how to use ReactJS with TypeScript.
+            {t.myKnowledge.react.description}
           </Feature>
 
           <Feature
@@ -153,7 +160,7 @@ export default function MyKnowledges() {
               <DiPhp size="1.25em" />
             }
           >
-            I have learned PHP when I was starting to learn programming. I have learned how to use PHP and how to use PHP with Zend Framework(now Laminas).
+            {t.myKnowledge.php.description}
           </Feature>
 
           <Feature
@@ -163,7 +170,7 @@ export default function MyKnowledges() {
               <DiJavascript1 size="1.25em" />
             }
           >
-            I am always learning Javascript. I have been using Javascript for 2 years. I have learned how to use Javascript and how to use Javascript with ReactJS.
+            {t.myKnowledge.javascript.description}
           </Feature>
 
           <Feature
@@ -173,7 +180,7 @@ export default function MyKnowledges() {
               <FaDocker size="1.25em" />
             }
           >
-            Docker is a tool that allows you to create, deploy, and run applications by using containers. I have learned how to use Docker and how to use Docker with ReactJS.
+            {t.myKnowledge.docker.description}
           </Feature>
           <Feature
             color="cyan"
@@ -182,7 +189,7 @@ export default function MyKnowledges() {
               <FaReact size="1.25em" />
             }
           >
-            Learn React Native is my hobby. I have learned how to use React Native and how to use React Native with TypeScript.
+            {t.myKnowledge.reactNative.description}
           </Feature>
           <Feature
             color="orange"
@@ -191,7 +198,7 @@ export default function MyKnowledges() {
               <SiMysql size="1.25em" />
             }
           >
-            SQL has been essential to my career. I have learned how to use SQL and how to use SQL with PHP and many other languages.
+            {t.myKnowledge.sql.description}
           </Feature>
           <Feature
             color="green"
@@ -200,7 +207,7 @@ export default function MyKnowledges() {
               <FaNodeJs size="1.25em" />
             }
           >
-            NodeJS is my headache. It's hard but I like it, and I hove to improve my skills on it.
+            {t.myKnowledge.node.description}
           </Feature>
 
           <Feature
@@ -210,7 +217,7 @@ export default function MyKnowledges() {
               <TbBrandNextjs size="1.25em" />
             }
           >
-            NextJS is a framework for ReactJS. I'm always using it for my projects. This site, for example, is made with NextJS.
+            {t.myKnowledge.next.description}
           </Feature>
 
           <Feature
@@ -220,7 +227,7 @@ export default function MyKnowledges() {
               <SiTypescript size="1.20em" />
             }
           >
-            Typescript is a superset of Javascript. I'm always using it for my projects too because it's very useful.
+            {t.myKnowledge.typescript.description}
           </Feature>
 
           <Feature
@@ -230,7 +237,7 @@ export default function MyKnowledges() {
               <SiHtml5 size="1.25em" />
             }
           >
-            Well, HTML is a markup language. I have learned how to use HTML and how to use HTML with CSS when I was starting to learn programming.
+            {t.myKnowledge.html.description}
           </Feature>
 
           <Feature
@@ -240,7 +247,7 @@ export default function MyKnowledges() {
               <SiCss3 size="1.25em" />
             }
           >
-            CSS is a style sheet language. I have learned how to use CSS and how to use CSS with HTML when I was starting to learn programming.
+            {t.myKnowledge.css.description}
           </Feature>
 
           <Feature
@@ -250,7 +257,7 @@ export default function MyKnowledges() {
               <SiSass size="1.25em" />
             }
           >
-            SASS is a CSS preprocessor. I have learned how to use SASS and how to use SASS with HTML and CSS when I was starting to learn programming. But I have to much to learn about SASS.
+            {t.myKnowledge.sass.description}
           </Feature>
           <Feature
             color="pink"
@@ -259,15 +266,7 @@ export default function MyKnowledges() {
               <SiSparkar size="1.25em" />
             }
           >
-            Another Hobby, I have used SPARK AR for some filters on Instagram. Click {" "}
-              <Link 
-                href="https://www.instagram.com/taufik.rahman/" 
-                isExternal
-                color="#ED8936"
-              >
-                here
-              </Link> 
-            {" "} to see my filter portfolio.
+            {t.myKnowledge.spark.description}
           </Feature>
         </SimpleGrid>
       </Box>

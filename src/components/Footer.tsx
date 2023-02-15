@@ -55,15 +55,15 @@ export default function Footer() {
         spacing={4}
         justify={{ base: 'center', md: 'space-between' }}
         align={{ base: 'center', md: 'center' }}>
-        <Text>{new Date().getFullYear()} © This site has been built by Gunichi using Next.js and Chakra UI.</Text>
+        <Text>{new Date().getFullYear()} © This site has been built by Gunichi.</Text>
         <Stack direction={'row'} spacing={6}>
-          <SocialButton label={'Twitter'} href={'#'}>
+          <SocialButton label={'Twitter'} href={'https://twitter.com/gunichii'}>
             <FaTwitter />
           </SocialButton>
-          <SocialButton label={'YouTube'} href={'#'}>
+          {/* <SocialButton label={'YouTube'} href={'#'}>
             <FaYoutube />
-          </SocialButton>
-          <SocialButton label={'Instagram'} href={'#'}>
+            </SocialButton> */ }
+          <SocialButton label={'Instagram'} href={'https://instagram.com/gunichi'}>
             <FaInstagram />
           </SocialButton>
         </Stack>
