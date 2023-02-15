@@ -188,7 +188,7 @@ export const pt = {
     },
     wait: {
       "title": 'Tome um café e relaxe...',
-      "description": `Ainda estou trabalhando nesse projeto. Mas ficará pronto em breve!`,
+      "description": `Ainda estou trabalhando nesse projeto. Mas estará pronto em breve!`,
     }
   },
   contact : {
