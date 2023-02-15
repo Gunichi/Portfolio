@@ -10,13 +10,15 @@ import {
   useColorModeValue,
   createIcon,
   keyframes,
+  Flex,
 } from '@chakra-ui/react';
-import { motion } from 'framer-motion';
 import { TypeAnimation } from 'react-type-animation';
 import LottiePlayer from '../animations/Lottie';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { en, pt } from '@/locales/translation';
 import { useRouter } from 'next/router';
+import ReactTypingEffect from 'react-typing-effect';
+import LottieHi from '@/animations/LottieHi';
 
 export default function Discover() {
 
@@ -60,47 +62,61 @@ export default function Discover() {
           spacing={{ base: 8, md: 14 }}
           pt={{ base: 20, md: 40 }}
         >
-        
-          <Heading
+          <Stack spacing={0} align={'center'}>
+          <Heading 
             fontWeight={600}
-            fontFamily={'Aileron'}
+            fontFamily={'Caveat'}
             fontSize={{ base: '2xl', sm: '4xl', md: '6xl' }}
             lineHeight={'110%'}
-          >
-            {t.discover.title}
-            <span role="img" aria-label="sheep">👋</span>{' '}
-            <Text 
-              mb={30}
-              as={'span'} 
-              color={'#ED8A0A'}
-              lineHeight={'110%'}
-              _hover={{
-                color: '#301551',
-                transition: '0.5s',
-              }}
+            color={'#301551'}
+            animation={animation}
             >
-              <TypeAnimation
-                // Same String at the start will only be typed once, initially
-                sequence={[
-                t.discover.sequence1,
-                1000,
-                t.discover.sequence2,
-                1000,
-                t.discover.sequence3,
-                1000,
+              <Flex alignItems="center">
+                {t.discover.title} <LottieHi />
+              </Flex>
+            </Heading>
+          <Heading fontWeight={600}>
+            <Box as="span" mt={5} animation={animation}>
+              <ReactTypingEffect
+                text={[
+                  t.discover.sequence1,
+                  t.discover.sequence2,
+                  t.discover.sequence3,
                 ]}
-                speed={50} // Custom Speed from 1-99 - Default Speed: 40
-                style={{ 
-                  fontSize: `{isMobile ? 20 : 60}px`,
-                  width: '100%',
-                  whiteSpace: 'nowrap',
-                  display: 'inline-block',
-                }}
-                wrapper="span" // Animation will be rendered as a <span>
-                repeat={1000} // Animation will repeat forever
+                eraseDelay={500}
+                typingDelay={500}
+                eraseSpeed={50}
+                speed={50}
+                displayTextRenderer={(text, i) => {
+                  return (
+                    <h1>
+                      {text.split('').map((char, i) => {
+                        const key = `${i}`;
+                        return (
+                          <span
+                            key={key}
+                            style=
+                            {{
+                              color: '#ED8A0A',
+                              fontSize: '1.5rem',
+                              fontFamily: 'Caveat',
+                              fontWeight: 700,
+                              lineHeight: '1.5rem',
+                              letterSpacing: '0.1rem',
+                              animation: 'float 5s ease-in-out infinite',
+                              transform: 'translateY(-5px)',
+
+                            }}
+                          >{char}</span>
+                        );
+                      })}
+                    </h1>
+                  );
+                }}        
               />
-            </Text>
-          </Heading>
+              </Box>
+            </Heading>
+          </Stack>
           <Text color={'gray.500'}>
             {t.discover.description}
           </Text>
@@ -109,7 +125,9 @@ export default function Discover() {
             spacing={3}
             align={'center'}
             alignSelf={'center'}
+            animation={animation}
             position={'relative'}>
+            
             <LottiePlayer />
             <Box>
               <Icon

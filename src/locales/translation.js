@@ -105,7 +105,7 @@ export const pt = {
   discover: {
     "title": 'Opa!',
     "subtitle": 'Eu sou um engenheiro de software.',
-    "sequence1": `Eu sou o Gunichi`,
+    "sequence1": `Eu sou Gunichi!`,
     "sequence2": `Eu sou um engenheiro de software`,
     "sequence3": `Eu sou um desenvolvedor fullstack`,
     "description": `Sou um engenheiro de software brasileiro, morando em Minas Gerais, Brasil. Sou apaixonado por construir software de todos os tipos, desde aplicativos da web até aplicativos móveis. Estou sempre aprendendo e melhorando minhas habilidades. Se você quiser saber mais sobre mim, continue rolando!`,
