@@ -49,12 +49,8 @@ export default function Home() {
           <Fade direction="left" cascade>
             <Discover />
           </Fade>
-          <Fade direction="right" cascade>
             <AboutMe />
-          </Fade>
-          <Fade direction="left" cascade>
             <MyKnowledges />
-          </Fade>
           <Fade direction="right" cascade>
             <Projects />
           </Fade>
