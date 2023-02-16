@@ -105,6 +105,11 @@ export const en = {
     "formModalClose": "Close",
     "emptyInputs": "Please fill in all the fields.",
   },
+  footer: {
+    "madeWith": "Made with",
+    "by": "by",
+    "and": "and",
+  }
 };
 
 export const pt = { 
@@ -199,7 +204,7 @@ export const pt = {
   },
   contact : {
     "title": 'Fique à vontade para entrar em contato',
-    "subtitle": `Estou sempre aberto a discutir novos projetos, ideias criativas ou oportunidades de fazer parte de suas visões. Então, se você quiser dizer oi, ficarei feliz em ouvir de você!`,
+    "subtitle": `Estou sempre aberto a discutir novos projetos, ideias criativas ou oportunidades de fazer parte de suas visões. Então, se você quiser dizer oi, ficarei feliz em ouvir você!`,
     "formName": 'Nome',
     "formNamePlaceholder": 'Digite seu nome aqui...',
     "formEmail": 'Email',
@@ -213,5 +218,10 @@ export const pt = {
     "formMessageError": 'Ocorreu um erro ao enviar sua mensagem, tente novamente.',
     "formModalClose": "Fechar",
     "emptyInputs": "Por favor, preencha todos os campos.",
+  },
+  footer: {
+    "madeWith": "Feito com",
+    "by": "por ",
+    "and": "e",
   }
 };

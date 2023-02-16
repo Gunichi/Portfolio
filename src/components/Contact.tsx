@@ -44,11 +44,15 @@ export default function Contact() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
+  const [isSending, setIsSending] = useState(false);
+  const [inputEmpty, setInputEmpty] = useState(false);
 
   const sendEmail = (e: any) => {
     e.preventDefault();
+    setIsSending(true);
     if (name === '' || email === '' || message === '') {
-      alert(t.contact.emptyInputs);
+      setInputEmpty(true);
+      setIsSending(false);
       return;
     }
     const templateParams = {
@@ -62,9 +66,11 @@ export default function Contact() {
         setName('');
         setEmail('');
         setMessage('');
+        setIsSending(false);
       }, (error) => {
+        onModalEmailErrorOpen();
+        setIsSending(false);
         console.log(error.text);
-        alert('Erro ao enviar a mensagem!');
       });
   }
   
@@ -101,7 +107,7 @@ export default function Contact() {
           </Stack>
           <form onSubmit={sendEmail}>
             <SimpleGrid columns={{ base: 1, md: 2 }} spacing={10}>
-              <FormControl id="name" isRequired>
+              <FormControl id="name">
                 <FormLabel color={'gray.500'}>
                   {t.contact.formName}
                 </FormLabel>
@@ -112,19 +118,20 @@ export default function Contact() {
                   onChange={(e) => setName(e.target.value)}
                 />
               </FormControl>
-              <FormControl id="email" isRequired>
+              <FormControl id="email">
                 <FormLabel color={'gray.500'}>
                   {t.contact.formEmail}
                 </FormLabel>
                 <Input 
                   variant='flushed' 
+                  type='email'
                   placeholder={t.contact.formEmailPlaceholder}
                   focusBorderColor='#301551' 
                   onChange={(e) => setEmail(e.target.value)}
                 />
               </FormControl>
             </SimpleGrid>
-              <FormControl id="message" isRequired>
+              <FormControl id="message">
                 <FormLabel color={'gray.500'}>
                   {t.contact.formMessage}
                 </FormLabel>
@@ -135,12 +142,16 @@ export default function Contact() {
                   onChange={(e) => setMessage(e.target.value)}
                 />
               </FormControl>
+              {inputEmpty && (
+                <Text color={'red.500'}>{t.contact.emptyInputs}</Text>
+              )}
               <Flex align={'center'} justify={'flex-end'}>
                 <Button
                   bgGradient={'linear(to-r, #ED8A0A, #301551)'}
                   color={'white'}
                   type='submit'
                   mt={8}
+                  isLoading={isSending}
                   rightIcon={<BsFillArrowRightCircleFill />}
                   _hover={{
                     bgGradient: 'linear(to-r, #301551, #ED8A0A)',
@@ -155,6 +166,7 @@ export default function Contact() {
             </form>
         </Stack>
       </Container>
+
       {/* Modal Email Sent */}
       <Modal isOpen={isModalEmailSentOpen} onClose={onModalEmailSentClose}>
         <ModalOverlay />

@@ -2,13 +2,28 @@ import {
   Box,
   chakra,
   Container,
+  Flex,
   Stack,
   Text,
   useColorModeValue,
   VisuallyHidden,
+  keyframes
 } from '@chakra-ui/react';
-import { FaInstagram, FaTwitter, FaYoutube } from 'react-icons/fa';
+import { motion } from 'framer-motion';
+import { FaInstagram, FaTwitter } from 'react-icons/fa';
 import { ReactNode } from 'react';
+import { useRouter } from 'next/router';
+import { en, pt } from '@/locales/translation';
+import LottieHeart from '@/animations/LottieHeart';
+
+const animationKeyframes = keyframes`
+0% { transform: scale(1) rotate(90); }
+50% { animation: float 5s ease-in-out infinite; transform: translateY(-5px) }
+100% { transform: scale(1) rotate(90); }
+`;
+
+const animation = `${animationKeyframes} 2s ease-in-out infinite`;
+
 
 const SocialButton = ({
   children,
@@ -43,6 +58,11 @@ const SocialButton = ({
 };
 
 export default function Footer() {
+
+  const router = useRouter();
+  const { locale } = router;
+  const t = locale === 'en' ? en : pt;
+  
   return (
     <Box
       bg={useColorModeValue('gray.50', 'gray.900')}
@@ -55,8 +75,12 @@ export default function Footer() {
         spacing={4}
         justify={{ base: 'center', md: 'space-between' }}
         align={{ base: 'center', md: 'center' }}>
-        <Text>{new Date().getFullYear()} © This site has been built by Gunichi.</Text>
-        <Stack direction={'row'} spacing={6}>
+        <Text>
+          <Flex align={'center'}>
+            {new Date().getFullYear()} © {t.footer.madeWith} <LottieHeart /> {t.footer.by} Gunichi 
+          </Flex>
+        </Text>
+        <Stack direction={'row'} spacing={6} animation={animation}>
           <SocialButton label={'Twitter'} href={'https://twitter.com/gunichii'}>
             <FaTwitter />
           </SocialButton>

@@ -54,15 +54,6 @@ export default function Discover() {
     return () => clearInterval(interval);
   }, [sequenceIndex]);
 
-
-  useEffect(() => {
-    if (locale === 'en') {
-      console.log('en');
-    } else {
-      console.log('pt');
-    }
-  }, [locale]);
-
   return (
     <Box bg={'#F9F9F9'} id="discover">
       <Head>
