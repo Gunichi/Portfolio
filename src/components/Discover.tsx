@@ -12,9 +12,8 @@ import {
   keyframes,
   Flex,
 } from '@chakra-ui/react';
-import { TypeAnimation } from 'react-type-animation';
 import LottiePlayer from '../animations/Lottie';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { en, pt } from '@/locales/translation';
 import { useRouter } from 'next/router';
 import ReactTypingEffect from 'react-typing-effect';
@@ -31,8 +30,7 @@ export default function Discover() {
   const animation = `${animationKeyframes} 2s ease-in-out infinite`;
   
   if (typeof window !== 'undefined') {
-    const [width, setWidth] = useState<number>(window.innerWidth);
-    
+    const [width, setWidth] = useState<number>(window.innerWidth);   
     const isMobile = width <= 768;
   }
 
@@ -40,6 +38,30 @@ export default function Discover() {
   const { locale } = router;
 
   const t = locale === 'en' ? en : pt;
+
+  const sequence = [
+    t.discover.sequence1,
+    t.discover.sequence2,
+    t.discover.sequence3,
+  ]
+
+  const [sequenceIndex, setSequenceIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setSequenceIndex((sequenceIndex + 1) % sequence.length);
+    }, 3000);
+    return () => clearInterval(interval);
+  }, [sequenceIndex]);
+
+
+  useEffect(() => {
+    if (locale === 'en') {
+      console.log('en');
+    } else {
+      console.log('pt');
+    }
+  }, [locale]);
 
   return (
     <Box bg={'#F9F9F9'} id="discover">
@@ -79,9 +101,7 @@ export default function Discover() {
             <Box as="span" mt={5} animation={animation}>
               <ReactTypingEffect
                 text={[
-                  t.discover.sequence1,
-                  t.discover.sequence2,
-                  t.discover.sequence3,
+                  sequence[sequenceIndex],
                 ]}
                 eraseDelay={500}
                 typingDelay={500}

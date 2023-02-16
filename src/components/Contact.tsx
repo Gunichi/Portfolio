@@ -12,18 +12,62 @@ import {
   FormControl,
   FormLabel,
   Flex,
+  useDisclosure,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalCloseButton,
+  ModalBody,
+  ModalFooter,
 } from '@chakra-ui/react';
+
 import LottieMessage from '@/animations/LottieMessage';
+
 import { useRouter } from 'next/router';
 import { BsFillArrowRightCircleFill } from 'react-icons/bs';
 import { en, pt } from '@/locales/translation';
+import { useState } from 'react';
+import emailjs from '@emailjs/browser';
+import LottieEmailSuccess from '@/animations/LottieEmailSuccess';
+import LottieEmailError from '@/animations/LottieEmailError';
 
 export default function Contact() {
+
+  const { isOpen: isModalEmailSentOpen, onOpen: onModalEmailSentOpen, onClose: onModalEmailSentClose } = useDisclosure();
+  const { isOpen: isModalEmailErrorOpen, onOpen: onModalEmailErrorOpen, onClose: onModalEmailErrorClose } = useDisclosure();
 
   const router = useRouter();
   const { locale } = router;
   const t = locale === 'en' ? en : pt;
 
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [message, setMessage] = useState('');
+
+  const sendEmail = (e: any) => {
+    e.preventDefault();
+    if (name === '' || email === '' || message === '') {
+      alert(t.contact.emptyInputs);
+      return;
+    }
+    const templateParams = {
+      from_name: name,
+      email: email,
+      message: message,
+    };
+    emailjs.send('service_ifqs5jt', 'template_eh0sk61', templateParams, 'Ff_SSB9sHJ2Wt3n_l')
+      .then((result) => {
+        onModalEmailSentOpen();
+        setName('');
+        setEmail('');
+        setMessage('');
+      }, (error) => {
+        console.log(error.text);
+        alert('Erro ao enviar a mensagem!');
+      });
+  }
+  
   return (
     <Box bg={'#F9F9F9'} id="contact">
       <Head>
@@ -44,17 +88,18 @@ export default function Contact() {
           textAlign={'center'}
           spacing={{ base: 8, md: 14 }}
           py={{ base: 20, md: 36 }}
-          >
-            <Stack spacing={0} align={'center'}>
-              <Heading>
-                <Flex align={'center'}>
-                  {t.contact.title} <LottieMessage />
-                </Flex>
-              </Heading>
-              <Text color={'gray.500'}>
-                {t.contact.subtitle}
-              </Text>
-            </Stack>
+        >
+          <Stack spacing={0} align={'center'}>
+            <Heading>
+              <Flex align={'center'}>
+                {t.contact.title} <LottieMessage />
+              </Flex>
+            </Heading>
+            <Text color={'gray.500'}>
+              {t.contact.subtitle}
+            </Text>
+          </Stack>
+          <form onSubmit={sendEmail}>
             <SimpleGrid columns={{ base: 1, md: 2 }} spacing={10}>
               <FormControl id="name" isRequired>
                 <FormLabel color={'gray.500'}>
@@ -64,6 +109,7 @@ export default function Contact() {
                   variant='flushed' 
                   placeholder={t.contact.formNamePlaceholder}
                   focusBorderColor='#301551' 
+                  onChange={(e) => setName(e.target.value)}
                 />
               </FormControl>
               <FormControl id="email" isRequired>
@@ -74,36 +120,100 @@ export default function Contact() {
                   variant='flushed' 
                   placeholder={t.contact.formEmailPlaceholder}
                   focusBorderColor='#301551' 
+                  onChange={(e) => setEmail(e.target.value)}
                 />
               </FormControl>
             </SimpleGrid>
-            <FormControl id="message" isRequired>
-              <FormLabel color={'gray.500'}>
-                {t.contact.formMessage}
-              </FormLabel>
-              <Input 
-                variant='flushed' 
-                placeholder={t.contact.formMessagePlaceholder}
-                focusBorderColor='#301551' 
-              />
-            </FormControl>
-            <Flex align={'center'} justify={'flex-end'}>
-              <Button
-                bgGradient={'linear(to-r, #ED8A0A, #301551)'}
-                color={'white'}
-                rightIcon={<BsFillArrowRightCircleFill />}
-                _hover={{
-                  bgGradient: 'linear(to-r, #301551, #ED8A0A)',
-                  shadow: 'xl',
-                  transform: 'translateY(-2px)',
-                  transition: 'all 0.2s',
-                }}
-              >
-                {t.contact.formSubmit}
-              </Button>             
-            </Flex>
+              <FormControl id="message" isRequired>
+                <FormLabel color={'gray.500'}>
+                  {t.contact.formMessage}
+                </FormLabel>
+                <Input 
+                  variant='flushed' 
+                  placeholder={t.contact.formMessagePlaceholder}
+                  focusBorderColor='#301551' 
+                  onChange={(e) => setMessage(e.target.value)}
+                />
+              </FormControl>
+              <Flex align={'center'} justify={'flex-end'}>
+                <Button
+                  bgGradient={'linear(to-r, #ED8A0A, #301551)'}
+                  color={'white'}
+                  type='submit'
+                  mt={8}
+                  rightIcon={<BsFillArrowRightCircleFill />}
+                  _hover={{
+                    bgGradient: 'linear(to-r, #301551, #ED8A0A)',
+                    shadow: 'xl',
+                    transform: 'translateY(-2px)',
+                    transition: 'all 0.2s',
+                  }}
+                >
+                  {t.contact.formSubmit}
+                </Button>     
+              </Flex>
+            </form>
         </Stack>
       </Container>
+      {/* Modal Email Sent */}
+      <Modal isOpen={isModalEmailSentOpen} onClose={onModalEmailSentClose}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>{t.contact.formTitleSuccess}</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+            <Text>{t.contact.formMessageSuccess}</Text>
+            <LottieEmailSuccess />
+          </ModalBody>
+
+          <ModalFooter>
+            <Button
+              bgGradient={'linear(to-r, #ED8A0A, #301551)'}
+              mr={3} 
+              color={'white'}
+              onClick={onModalEmailSentClose}
+              _hover={{
+                bgGradient: 'linear(to-r, #301551, #ED8A0A)',
+                shadow: 'xl',
+                transform: 'translateY(-2px)',
+                transition: 'all 0.2s',
+              }}
+            >
+              {t.contact.formModalClose}
+            </Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
+
+      {/* Modal Email Error */}
+      <Modal isOpen={isModalEmailErrorOpen} onClose={onModalEmailErrorClose}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>{t.contact.formTitleError}</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+            <Text>{t.contact.formMessageError}</Text>
+            <LottieEmailError />
+          </ModalBody>
+          
+          <ModalFooter>
+            <Button
+              bgGradient={'linear(to-r, #ED8A0A, #301551)'}
+              mr={3}
+              color={'white'}
+              onClick={onModalEmailErrorClose}
+              _hover={{
+                bgGradient: 'linear(to-r, #301551, #ED8A0A)',
+                shadow: 'xl',
+                transform: 'translateY(-2px)',
+                transition: 'all 2s',
+              }}
+            >
+              {t.contact.formModalClose}
+            </Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
     </Box>
   );
 }

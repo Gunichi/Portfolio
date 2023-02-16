@@ -98,7 +98,13 @@ export const en = {
     "formMessage": 'Message',
     "formMessagePlaceholder": "What's your message?",
     "formSubmit": 'Send',
-  }
+    "formTitleSuccess": "Success!",
+    "formTitleError": "Error!",
+    "formMessageSuccess": 'Your message was sent successfully!',
+    "formMessageError": 'An error occurred while sending your message, please try again.',
+    "formModalClose": "Close",
+    "emptyInputs": "Please fill in all the fields.",
+  },
 };
 
 export const pt = { 
@@ -201,5 +207,11 @@ export const pt = {
     "formMessage": 'Mensagem',
     "formMessagePlaceholder": "Digite sua mensagem aqui...",
     "formSubmit": 'Enviar',
+    "formTitleSuccess": "Sucesso!",
+    "formTitleError": "Erro!",
+    "formMessageSuccess": 'Sua mensagem foi enviada com sucesso!',
+    "formMessageError": 'Ocorreu um erro ao enviar sua mensagem, tente novamente.',
+    "formModalClose": "Fechar",
+    "emptyInputs": "Por favor, preencha todos os campos.",
   }
 };
