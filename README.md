@@ -4,7 +4,7 @@
 
 ![Resultado final do projeto](public/preview.png)
 >
-<h4 align="center"><a href="https://www.gunichi.me">Quer ver o projeto melhor? Clique aqui!</a></h4>
+<h4 align="center"><a href="https://gunichi.me/pt">Quer ver o projeto melhor? Clique aqui!</a></h4>
 
 ## 💼 Tecnologias utilizadas
 
